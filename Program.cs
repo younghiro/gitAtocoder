@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace gitAtcoder
 {
@@ -6,39 +7,44 @@ namespace gitAtcoder
     {
         static void Main(string[] args)
         {
-            //atcoderで解いた問題をgitやgithubにアップロードしていきます。
-            /*
-            
-            string[] input = Console.ReadLine().Split(" ");
-            int a = int.Parse(input[0]);
-            int b = int.Parse(input[1]);
-
-            if (a * b % 2 == 0)
+            int n = int.Parse(Console.ReadLine());
+            string[] value = Console.ReadLine().Split(' ');
+            var a = Enumerable.Repeat(0, n).ToArray();
+            /*Enumerable.Repeat(値、サイズ）
+             * Enumerable.Repeat(値、サイズ）.ToList() 指定されたサイズのリストを作成し
+             * 値で初期化する
+             * Enumerable.Repeat(値、サイズ）.ToArray
+             * 
+             * List<int> values = new List<int>(Enumerable.Repeat(0, n));
+             */
+           　for( int i=0; i<n; i++)
             {
-                Console.WriteLine("Even");
+                a[i] = int.Parse(value[i]);
             }
-            else
+            int kaisuu = 0;
+            bool owari = false;
+            do
             {
-                Console.WriteLine("Odd");
-            }
+                for (int i = 0; i < n; i++)
+                {
+                    int amari = a[i] % 2;
+                    if (amari == 0)
+                    {
+                        a[i] = a[i] / 2;
 
-            */
+                    }
+                    else
+                    {
+                        owari = true;
+                    }
+                }
+                if (!owari) kaisuu++;
+            } while (owari == false);
 
-            char[] c = Console.ReadLine().ToCharArray();
-            int a = int.Parse(c[0].ToString());
-            int b = int.Parse(c[1].ToString());
-            int d = int.Parse(c[2].ToString());
-
-            if(a+b+d == 0)
-            {
-                Console.WriteLine(0);
-            }else if(a + b + d == 1){
-                Console.WriteLine(2);
-            }else if(a + b + d == 2){
-                Console.WriteLine(3);
-            }else if(a + b + d == 3){
-                Console.WriteLine(4);
-            }
+            Console.WriteLine(kaisuu);
         }
+
+        
     }
+
 }
